@@ -24,7 +24,29 @@ resource "aws_route_table_association" "r2dso-lab_subnet_association" {
   subnet_id = aws_subnet.r2dso-lab_subnet.id
   route_table_id = aws_route_table.r2dso-lab_route_table.id
 }
+resource "aws_security_group" "r2dso-lab_sg" {
+  name_prefix = "r2dso-lab_sg"
+  vpc_id = aws_vpc.r2dso-lab_vpc.id
 
-output "r2dso-lab_public_ip" {
-  value = aws_instance.r2dso-lab_instance.public_ip
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+    ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+output "r2dso-lab-sg" {
+  value = aws_security_group.r2dso-lab_sg.id
+}
+
+output "r2dso-lab-subnet" {
+  value = aws_subnet.r2dso-lab_subnet.id
 }
