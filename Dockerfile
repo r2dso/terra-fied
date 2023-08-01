@@ -13,5 +13,4 @@ RUN git clone https://github.com/hashicorp/terraform.git ./ && \
     git checkout v${TERRAFORM_VERSION} && \
     /bin/bash scripts/build.sh
 
-WORKDIR $GOPATH
-ENTRYPOINT ["terraform"]
+COPY . /terra-fied
