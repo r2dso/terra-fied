@@ -1,16 +1,12 @@
-FROM golang:alpine
-MAINTAINER "HashiCorp Terraform Team <terraform@hashicorp.com>"
+FROM hashicorp/terraform:latest
 
-ENV TERRAFORM_VERSION=0.10.0
+RUN apk add --no-cache curl
 
-RUN apk add --update git bash openssh
-
-ENV TF_DEV=true
-ENV TF_RELEASE=true
-
-WORKDIR $GOPATH/src/github.com/hashicorp/terraform
-RUN git clone https://github.com/hashicorp/terraform.git ./ && \
-    git checkout v${TERRAFORM_VERSION} && \
-    /bin/bash scripts/build.sh
-
+# add kube configs and crts
 COPY . /terra-fied
+
+# terraform state directory
+# RUN mkdir /terra-fied/.state
+# VOLUME .state
+
+WORKDIR /terra-fied
