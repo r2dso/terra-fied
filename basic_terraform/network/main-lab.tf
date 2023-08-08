@@ -60,11 +60,32 @@ resource "aws_security_group" "r2dso-lab_sg" {
   }
 }
 
+resource "aws_security_group" "r2dso-weak_sg" {
+  name        = "ec2-tf-testing"
+  description = "SG for use with terraform testing"
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
 # Ouput the security group and subnet IDs to be used by the EC2 instance
 output "r2dso-lab-sg" {
   value = aws_security_group.r2dso-lab_sg.id
 }
 
+output "r2dso-weak-sg" {
+  value = aws_security_group.r2dso-weak_sg.id
+}
 output "r2dso-lab-subnet" {
   value = aws_subnet.r2dso-lab_subnet.id
 }
