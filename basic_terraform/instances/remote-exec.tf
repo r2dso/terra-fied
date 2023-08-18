@@ -1,15 +1,12 @@
 # provide an option to enable this module
 # if the variable "enabled" is true create a simple ec2 instance
 
-module "network" {
-  source = "../network"
-}
 resource "aws_instance" "remote-exec-example" {
   count = var.remoteexec_enabled ? 1 : 0
   ami           = "ami-06ca3ca175f37dd66"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [module.network.r2dso-lab-sg]
-  subnet_id = module.network.r2dso-lab-subnet
+  vpc_security_group_ids = [var.remote_exec_sgs]
+  subnet_id = var.remote_exec_subnet
 
   associate_public_ip_address = true
 
@@ -25,7 +22,7 @@ resource "aws_instance" "remote-exec-example" {
     ]
   }
 
-  iam_instance_profile = "tf-testing-role"
+  #iam_instance_profile = "tf-testing-role"
 
   connection {
     type        = "ssh"

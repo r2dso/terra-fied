@@ -14,3 +14,7 @@ output "lab_keypair" {
 output "priv_key" {
     value = tls_private_key.lab_priv_key.private_key_pem
 }
+
+output "lab_key_name" {
+  value = aws_key_pair.lab_keypair.key_name
+}

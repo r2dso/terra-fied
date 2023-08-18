@@ -4,8 +4,10 @@ module "network" {
 
 module "instances" {
   source = "./instances"
-  key_name = module.keys.lab_keypair
+  key_name = module.keys.lab_key_name
   priv_key = module.keys.priv_key
+  remote_exec_sgs = module.network.r2dso-lab-sg
+  remote_exec_subnet = module.network.r2dso-lab-subnet
   remoteexec_enabled = "true"
 }
 
@@ -13,7 +15,7 @@ module "keys" {
   source = "./keys"
 }
 
-resource "aws_instance" "r2dso-lab_instance" {
+resource "aws_instance" "r2dso_lab_instance" {
   ami = "ami-0b69ea66ff7391e80" // Amazon Linux 2 AMI (HVM), SSD Volume Type
   instance_type = "t2.micro"
   key_name = var.key_name
@@ -27,11 +29,11 @@ resource "aws_instance" "r2dso-lab_instance" {
 }
 
 output "r2dso-lab-pub-ip" {
-  value = aws_instance.r2dso-lab_instance.public_ip
+  value = aws_instance.r2dso_lab_instance.public_ip
 }
 
 output "public_ip_remoteexec" {
-  value = var.remoteexec-enabled ? module.instances.public_ip_remoteexec : null
+  value = var.remoteexec_enabled ? module.instances.public_ip_remoteexec : null
 }
 
 output "lab_keypair" {

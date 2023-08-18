@@ -14,3 +14,11 @@ variable "weakinstance_enabled" {
 variable "priv_key" {
     description = "Private key for SSH access"
 }
+
+variable "remote_exec_sgs" {
+    description = "Security group for remote-exec"
+}
+
+variable "remote_exec_subnet" {
+    description = "Subnet for remote-exec"
+}
