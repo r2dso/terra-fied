@@ -1,18 +1,16 @@
 module "network" {
   source = "./network"
 }
-
+module "keys" {
+  source = "./keys"
+}
 module "instances" {
   source = "./instances"
-  key_name = module.keys.lab_key_name
+  key_name = module.keys.lab_keypair
   priv_key = module.keys.priv_key
   remote_exec_sgs = module.network.r2dso-lab-sg
   remote_exec_subnet = module.network.r2dso-lab-subnet
   remoteexec_enabled = "true"
-}
-
-module "keys" {
-  source = "./keys"
 }
 
 resource "aws_instance" "r2dso_lab_instance" {
@@ -34,9 +32,4 @@ output "r2dso-lab-pub-ip" {
 
 output "public_ip_remoteexec" {
   value = var.remoteexec_enabled ? module.instances.public_ip_remoteexec : null
-}
-
-output "lab_keypair" {
-  value = module.keys.lab_keypair
-  sensitive = true
 }

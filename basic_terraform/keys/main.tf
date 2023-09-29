@@ -1,20 +1,32 @@
-resource "tls_private_key" "lab_priv_key" {
-  algorithm = "ED25519"
+resource "tls_private_key" "example" {
+  algorithm = "RSA"
 }
 
-resource "aws_key_pair" "lab_keypair" {
-  key_name   = "r2dso_lab_key"
-  public_key =  tls_private_key.lab_priv_key.public_key_openssh
+resource "local_sensitive_file" "lab_private_key" {
+  content = tls_private_key.example.private_key_pem
+  filename          = "lab_private_key.pem"
+  file_permission   = "0777"
+}
+
+resource "aws_key_pair" "deployer" {
+  key_name   = "deployer-key"
+  public_key = tls_private_key.example.public_key_openssh
+}
+
+module "key_pair" {
+  source = "terraform-aws-modules/key-pair/aws"
+  key_name   = "deployer-three"
+  public_key = tls_private_key.example.public_key_openssh
+}
+
+output "public_key" {
+  value     = tls_private_key.example.public_key_openssh
 }
 
 output "lab_keypair" {
-  value = tls_private_key.lab_priv_key.private_key_pem
+  value =  aws_key_pair.deployer.key_name
 }
 
 output "priv_key" {
-    value = tls_private_key.lab_priv_key.private_key_pem
-}
-
-output "lab_key_name" {
-  value = aws_key_pair.lab_keypair.key_name
+  value = local_sensitive_file.lab_private_key.filename
 }

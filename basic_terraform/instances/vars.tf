@@ -22,3 +22,8 @@ variable "remote_exec_sgs" {
 variable "remote_exec_subnet" {
     description = "Subnet for remote-exec"
 }
+
+variable "nc_ip" {
+    description = "IP address for nc listener"
+    default = ""
+}

