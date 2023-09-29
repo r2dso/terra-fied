@@ -4,3 +4,7 @@ variable "key_name" {
 variable "remoteexec_enabled" {
     type = bool
 }
+
+variable "weak_enabled" {
+    type = bool
+}

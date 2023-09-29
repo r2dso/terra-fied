@@ -6,7 +6,7 @@ variable "remoteexec_enabled" {
     default = false
 }
 
-variable "weakinstance_enabled" {
+variable "weak_enabled" {
     type = bool
     default = false
 }

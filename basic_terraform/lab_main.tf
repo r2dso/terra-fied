@@ -10,7 +10,8 @@ module "instances" {
   priv_key = module.keys.priv_key
   remote_exec_sgs = module.network.r2dso-lab-sg
   remote_exec_subnet = module.network.r2dso-lab-subnet
-  remoteexec_enabled = "true"
+  remoteexec_enabled = var.remoteexec_enabled
+  weak_enabled = var.weak_enabled
 }
 
 resource "aws_instance" "r2dso_lab_instance" {
