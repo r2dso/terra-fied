@@ -1,0 +1,15 @@
+rules:
+  - id: detect-nc-reverse-shell
+    languages: [hcl]
+    message: |
+      'nc' detected in remote-exec provisioner. Ensure this is not creating a reverse shell unintentionally.
+    pattern: |
+      provisioner "remote-exec" {
+        ...
+        inline = [
+          ...,
+          "nc ...",
+          ...
+        ]
+      }
+    severity: ERROR
