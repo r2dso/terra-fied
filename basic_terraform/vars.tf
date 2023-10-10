@@ -3,8 +3,10 @@ variable "key_name" {
 }
 variable "remoteexec_enabled" {
     type = bool
+    default = false
 }
 
 variable "weak_enabled" {
     type = bool
+    default = false
 }

@@ -36,9 +36,9 @@ resource "aws_instance" "weak-example" {
 }
 
 output "public_ip_weak_instance" {
-  value = aws_instance.weak-example[0].public_ip
+  value = length(aws_instance.weak-example) > 0 ? aws_instance.weak-example[0].public_ip : null
 }
 
 output "weak_instance_id" {
-  value = aws_instance.weak-example[0].id
+  value = length(aws_instance.weak-example) > 0 ? aws_instance.weak-example[0].id : null
 }

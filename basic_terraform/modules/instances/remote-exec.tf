@@ -50,9 +50,9 @@ provisioner "remote-exec" {
 }
 
 output "public_ip_remoteexec" {
-  value = aws_instance.remote-exec-example[0].public_ip
+  value = length(aws_instance.remote-exec-example) > 0 ? aws_instance.remote-exec-example[0].public_ip : null
 }
 
 output "remote-exec-instance" {
-  value = aws_instance.remote-exec-example[0].id
+  value = length(aws_instance.remote-exec-example) > 0 ? aws_instance.remote-exec-example[0].id : null
 }
