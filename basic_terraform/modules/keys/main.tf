@@ -5,7 +5,7 @@ resource "tls_private_key" "example" {
 resource "local_sensitive_file" "lab_private_key" {
   content = tls_private_key.example.private_key_pem
   filename          = "lab_private_key.pem"
-  file_permission   = "0777"
+  file_permission   = "0400"
 }
 
 resource "aws_key_pair" "deployer" {
