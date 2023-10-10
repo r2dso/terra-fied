@@ -1,11 +1,11 @@
 module "network" {
-  source = "./network"
+  source = "./modules/network"
 }
 module "keys" {
-  source = "./keys"
+  source = "./modules/keys"
 }
 module "instances" {
-  source = "./instances"
+  source = "./modules/instances"
   key_name = module.keys.lab_keypair
   priv_key = module.keys.priv_key
   remote_exec_sgs = module.network.r2dso-lab-sg
