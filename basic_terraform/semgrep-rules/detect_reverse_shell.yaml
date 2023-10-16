@@ -1,15 +1,18 @@
 rules:
-  - id: detect-nc-reverse-shell
-    languages: [hcl]
+  - id: test-terraform-shells
+    languages:
+      - terraform
     message: |
-      'nc' detected in remote-exec provisioner. Ensure this is not creating a reverse shell unintentionally.
-    pattern: |
-      provisioner "remote-exec" {
-        ...
-        inline = [
-          ...,
-          "nc ...",
-          ...
-        ]
-      }
-    severity: ERROR
+      Potential Shells or bad code $CMD
+    severity: WARNING
+    patterns:
+      - pattern: |
+          provisioner "remote-exec" {
+            inline = [
+              ..., $CMD, ...
+            ]
+          }
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: .*nc.*
+      - focus-metavariable: $CMD
