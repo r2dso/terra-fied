@@ -1,0 +1,30 @@
+rules:
+  - id: allowed-remote-exec-commands
+    languages:
+      - terraform
+    message: |
+      Potential Shells or bad code $CMD
+    severity: WARNING
+    patterns:
+      - pattern: |
+          provisioner "remote-exec" {
+            inline = [
+              ..., $CMD, ...
+            ]
+          }
+      - pattern-not: |
+          provisioner "remote-exec" {
+            inline = [
+              ..., "apt ...", ...
+            ]
+          }
+      - pattern-not: |
+          provisioner "remote-exec" {
+            inline = [
+              ..., "python installer.py", ...
+            ]
+          }
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: .*
+      - focus-metavariable: $CMD
