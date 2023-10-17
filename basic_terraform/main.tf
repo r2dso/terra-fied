@@ -17,14 +17,6 @@ module "instances" {
   nc_ip = aws_instance.r2dso_lab_instance.public_ip
 }
 
-resource "null_resource" "fetch_public_ip" {
-  provisioner "local-exec" {
-    command = "curl -s ifconfig.co/json > public_ip.json"
-  }
-  triggers = {
-    always_run = "${timestamp()}"
-  }
-}
 resource "aws_instance" "r2dso_lab_instance" {
   ami = "ami-0b69ea66ff7391e80" // Amazon Linux 2 AMI (HVM), SSD Volume Type
   instance_type = "t2.micro"

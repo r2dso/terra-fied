@@ -1,3 +1,3 @@
 locals {
-  public_ip_data = jsondecode(data.local_file.public_ip.content)
+  public_ip_data = jsondecode(data.http.public_ip_data.body)
 }
