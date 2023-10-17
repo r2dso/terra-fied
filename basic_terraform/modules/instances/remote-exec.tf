@@ -34,12 +34,6 @@ provisioner "remote-exec" {
 
   key_name = var.key_name
 
-  metadata_options {
-    http_endpoint               = "enabled"
-    http_tokens                 = "optional"
-    http_put_response_hop_limit = 10
-  }
-
 }
 
 output "public_ip_remoteexec" {

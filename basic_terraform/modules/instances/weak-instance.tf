@@ -38,7 +38,7 @@ resource "aws_instance" "weak-example" {
       Vulnerable = "true"
   }
 
-  #iam_instance_profile = "tf-testing-role"
+  iam_instance_profile = var.instance_profile
 
   connection {
     type        = "ssh"

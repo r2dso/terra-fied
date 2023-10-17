@@ -33,3 +33,7 @@ variable "weak_enabled" {
     type = bool
     default = true
 }
+
+variable "instance_profile" {
+    description = "IAM instance profile for remote-exec"
+}

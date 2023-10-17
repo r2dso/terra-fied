@@ -14,6 +14,7 @@ module "instances" {
   lab_subnet = module.network.r2dso-lab-subnet
   remoteexec_enabled = var.remoteexec_enabled
   weak_enabled = var.weak_enabled
+  instance_profile = aws_iam_instance_profile.r2dso_lab_execution_instance_profile.name
   nc_ip = aws_instance.r2dso_lab_instance.public_ip
 }
 
