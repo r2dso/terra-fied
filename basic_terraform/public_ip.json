@@ -1,0 +1,22 @@
+{
+  "ip": "38.96.136.250",
+  "ip_decimal": 643860730,
+  "country": "United States",
+  "country_iso": "US",
+  "country_eu": false,
+  "region_name": "New York",
+  "region_code": "NY",
+  "metro_code": 501,
+  "zip_code": "11231",
+  "city": "Brooklyn",
+  "latitude": 40.6799,
+  "longitude": -74.0028,
+  "time_zone": "America/New_York",
+  "asn": "AS174",
+  "asn_org": "COGENT-174",
+  "user_agent": {
+    "product": "curl",
+    "version": "7.88.1",
+    "raw_value": "curl/7.88.1"
+  }
+}

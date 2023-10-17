@@ -6,11 +6,15 @@ variable "priv_key" {
     description = "Private key for SSH access"
 }
 
-variable "remote_exec_sgs" {
+variable "lab_vpc" {
+    description = "VPC for labs"
+}
+
+variable "lab_sgs" {
     description = "Security group for remote-exec"
 }
 
-variable "remote_exec_subnet" {
+variable "lab_subnet" {
     description = "Subnet for remote-exec"
 }
 

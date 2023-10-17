@@ -1,5 +1,5 @@
 rules:
-  - id: allowed-remote-exec-commands
+  - id: test-terraform-shells
     languages:
       - terraform
     message: |
