@@ -4,5 +4,5 @@
 # }
 
 data "http" "public_ip_data" {
-  url = "http://ifconfig.co/json"
+  url = "https://ifconfig.io/ip"
 }

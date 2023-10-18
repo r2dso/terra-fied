@@ -1,6 +1,6 @@
 module "network" {
   source = "./modules/network"
-    participant_ip = "${local.public_ip_data.ip}/32"
+    participant_ip = "${local.public_ip_data}/32"
 }
 module "keys" {
   source = "./modules/keys"
