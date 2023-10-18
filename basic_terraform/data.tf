@@ -4,5 +4,5 @@
 # }
 
 data "http" "public_ip_data" {
-  url = "https://ipv4.icanhazip.com/"
+  url = "https://ifconfig.io/ip"
 }
