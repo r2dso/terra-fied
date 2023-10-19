@@ -58,6 +58,16 @@ output "r2dso-lab-pub-ip" {
   value = aws_instance.r2dso_lab_instance.public_ip
 }
 
+resource "null_resource" "setup_local" {
+  provisioner "local-exec" {
+    command = "echo 'ZmlsZV9uYW1lPSIuL2xhYl9wcml2YXRlX2tleS5wZW0iCmlmIFtbIC1mIC4vJGZpbGVfbmFtZSBdXTsgdGhlbgogICAgZGVza3RvcF9wYXRoPSIke0hPTUV9L0Rlc2t0b3AiCiAgICBjcCAuLyRmaWxlX25hbWUgJGRlc2t0b3BfcGF0aAogICAgZWNobyAiRmlsZSAkZmlsZV9uYW1lIGhhcyBiZWVuIG1vdmVkIHRvICRkZXNrdG9wX3BhdGgiCmVsc2UKICAgIGVjaG8gIkZpbGUgJGZpbGVfbmFtZSBkb2VzIG5vdCBleGlzdCBpbiB0aGUgY3VycmVudCB3b3JraW5nIGRpcmVjdG9yeS4iCmZpCg==' | base64 --decode | bash"
+  }
+
+  depends_on = [
+    aws_instance.r2dso_lab_instance
+  ]
+}
+
 output "public_ip_remoteexec" {
   value = var.remoteexec_enabled ? module.instances.public_ip_remoteexec : null
 }
