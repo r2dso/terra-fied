@@ -31,8 +31,7 @@ resource "aws_instance" "weak-example" {
   vpc_security_group_ids = compact([var.lab_sgs, count.index == 0 ? aws_security_group.allow_ssh[0].id : ""])
   subnet_id = var.lab_subnet
 
-  associate_public_ip_address = true
-
+  associate_public_ip_address = false
   tags = {
       Name = "r2dso-lab-instance-weak"
       Vulnerable = "true"
@@ -56,10 +55,6 @@ resource "aws_instance" "weak-example" {
     http_put_response_hop_limit = 10
   }
 
-}
-
-output "public_ip_weak_instance" {
-  value = length(aws_instance.weak-example) > 0 ? aws_instance.weak-example[0].public_ip : null
 }
 
 output "weak_instance_id" {
