@@ -14,7 +14,7 @@ This repository hosts a collection of Terraform modules designed to demonstrate 
     Real-world Scenarios: Explore real-world scenarios like a reverse shell setup through the remote-exec provisioner, and discover how to mitigate such risks.
     Interactive Learning: Modify and apply configurations to see first-hand the impact of different security settings.
 
-## Usage
+### Usage
 
 Clone this repository and navigate to the basic_terraform directory. Ensure you have Terraform installed and AWS credentials configured. Follow the instructions in each module's README for detailed setup and usage information.
 
