@@ -1,0 +1,9 @@
+rules:
+- id: detect-rsa-private-key
+  languages:
+    - generic
+  message: RSA private key detected
+  severity: ERROR
+  patterns:
+    - pattern-regex: |
+        -----BEGIN\s+PRIVATE\s+KEY-----[a-zA-Z0-9+/\s=]+-----END\s+PRIVATE\s+KEY-----

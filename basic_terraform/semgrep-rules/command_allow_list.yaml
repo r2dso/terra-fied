@@ -3,7 +3,7 @@ rules:
     languages:
       - terraform
     message: |
-      Potential Shells or bad code $CMD
+      Potential Shells or bad code $CMD using an allow list of known terms
     severity: WARNING
     patterns:
       - pattern: |
@@ -12,18 +12,8 @@ rules:
               ..., $CMD, ...
             ]
           }
-      - pattern-not: |
-          provisioner "remote-exec" {
-            inline = [
-              ..., "apt ...", ...
-            ]
-          }
-      - pattern-not: |
-          provisioner "remote-exec" {
-            inline = [
-              ..., "python installer.py", ...
-            ]
-          }
+      - pattern-not-regex: |
+          ^.*(python|ruby).*$
       - metavariable-regex:
           metavariable: $CMD
           regex: .*

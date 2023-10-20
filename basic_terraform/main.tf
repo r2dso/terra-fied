@@ -26,29 +26,6 @@ resource "aws_instance" "r2dso_lab_instance" {
   subnet_id = module.network.r2dso-external_subnet
   associate_public_ip_address = true
 
-  # provisioner "file" {
-  #   source      = "prepare_my_instance.sh"
-  #   destination = "/tmp/prepare.sh"
-  #   connection {
-  #     type        = "ssh"
-  #     user        = "ubuntu"
-  #     private_key = file(var.private_key_path)
-  #     host        = self.public_ip
-  #   }
-  # }
-
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "chmod +x /tmp/prepare.sh",
-  #   ]
-
-  #   connection {
-  #     type        = "ssh"
-  #     user        = "ec2-user"
-  #     private_key = ""
-  #     host        = self.public_ip
-  #   }
-  # }
   tags = {
     Name = "r2dso-exlab-instance"
   }
