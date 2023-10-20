@@ -37,3 +37,8 @@ resource "aws_iam_instance_profile" "r2dso_lab_execution_instance_profile" {
   name = "IMDSv1ExecutionInstanceProfile"
   role = aws_iam_role.r2dso_lab_execution_role.name
 }
+
+resource "aws_iam_role_policy_attachment" "r2dso_lab_execution_policy_attach" {
+  role       = aws_iam_role.r2dso_lab_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
