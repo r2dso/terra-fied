@@ -1,3 +1,5 @@
+![terrafied](logo.png)
+
 # Welcome to Terra-fied!
 
 This repository hosts a collection of Terraform modules designed to demonstrate various security considerations and potential pitfalls when managing infrastructure as code (IAC) using Terraform. Through hands-on examples, users can explore common misconfigurations and learn best practices to ensure a secure and robust Terraform setup.
