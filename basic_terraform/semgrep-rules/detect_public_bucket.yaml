@@ -1,0 +1,44 @@
+rules:
+- id: public-s3-bucket
+  languages:
+  - terraform
+  message: |
+    S3 Bucket has public access configuration. Ensure this is configured as per your organization's policy.
+  severity: ERROR
+  pattern-either:
+  - pattern: |
+      resource "aws_s3_bucket_acl" $X {
+        ...
+        acl = "public-read"
+        ...
+      }
+  - pattern: |
+      resource "aws_s3_bucket_acl" $Y {
+        ...
+        acl = "public-read-write"
+        ...
+      }
+  - pattern: |
+      resource "aws_s3_bucket_public_access_block" $Z {
+        ...
+        block_public_acls = false
+        ...
+      }
+  - pattern: |
+      resource "aws_s3_bucket_public_access_block" $A {
+        ...
+        block_public_policy = false
+        ...
+      }
+  - pattern: |
+      resource "aws_s3_bucket_public_access_block" $B {
+        ...
+        ignore_public_acls = false
+        ...
+      }
+  - pattern: |
+      resource "aws_s3_bucket_public_access_block" $C {
+        ...
+        restrict_public_buckets = false
+        ...
+      }
