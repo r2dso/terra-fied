@@ -32,5 +32,7 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+tfplan.json
+tfplan.out
 
 lab_private_key.pem

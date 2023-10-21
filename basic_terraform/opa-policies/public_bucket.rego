@@ -18,7 +18,15 @@ lax_public_access_block(resource) {
 
 deny[msg] {
     resource := tfplan.resource_changes[_]
-    print(resource.change.after)
+    print(resource.con)
+    print("\n")
+    public_read_acl(resource.change.after)
+    msg = sprintf("Public read access is granted to the S3 bucket by setting acl to public-read in resource %v", [resource.address])
+}
+
+deny[msg] {
+    resource := tfplan.configuration.root_module[_]
+    print(resource.expressions.acl.constant_value)
     print("\n")
     public_read_acl(resource.change.after)
     msg = sprintf("Public read access is granted to the S3 bucket by setting acl to public-read in resource %v", [resource.address])
