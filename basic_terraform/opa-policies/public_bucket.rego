@@ -12,5 +12,5 @@ public_ssh_cidr(resource) {
 deny[msg] {
     resource := tfplan.resource_changes[_]
     public_ssh_cidr(resource.change.after)
-    msg = sprintf("Public CIDR block has been configured at resource %v", [resource.address])
+    msg = sprintf("Public CIDR block has been configured for SSH at resource %v", [resource.address])
 }
