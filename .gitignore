@@ -37,3 +37,4 @@ tfplan.json
 tfplan.out
 
 lab_private_key.pem
+basic_terraform/r2dso.tfplan
