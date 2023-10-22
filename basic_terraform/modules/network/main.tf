@@ -27,18 +27,6 @@ resource "aws_route_table" "r2dso-lab_route_table" {
   }
 }
 
-variable "first_number" {
-  default = 2
-}
-
-variable "second_number" {
-  default = 2
-}
-
-locals {
-  concatenated_port = tonumber("${var.first_number}${var.second_number}")
-}
-
 # Associate the subnet with the route table
 resource "aws_route_table_association" "r2dso-lab_subnet_association" {
   subnet_id = aws_subnet.r2dso-lab_subnet.id
@@ -51,8 +39,8 @@ resource "aws_security_group" "r2dso-lab_sg" {
   vpc_id = aws_vpc.r2dso-lab_vpc.id
 
   ingress {
-    from_port = local.concatenated_port
-    to_port = local.concatenated_port
+    from_port = 22
+    to_port = 22
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
