@@ -1,5 +1,10 @@
 resource "aws_iam_role" "r2dso_lab_execution_role" {
   name               = "IMDSv1ExecutionRole"
+  tags = {
+    Name = "IMDSv1ExecutionRole"
+    terrafied = true
+  }
+  
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -36,6 +41,10 @@ EOF
 resource "aws_iam_instance_profile" "r2dso_lab_execution_instance_profile" {
   name = "IMDSv1ExecutionInstanceProfile"
   role = aws_iam_role.r2dso_lab_execution_role.name
+  tags = {
+    Name = "IMDSv1ExecutionInstanceProfile"
+    terrafied = true
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "r2dso_lab_execution_policy_attach" {

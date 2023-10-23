@@ -28,6 +28,7 @@ resource "aws_instance" "r2dso_lab_instance" {
 
   tags = {
     Name = "r2dso-exlab-instance"
+    terrafied = true
   }
 }
 

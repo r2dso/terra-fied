@@ -1,0 +1,16 @@
+package main
+
+import input as tfplan
+
+# Define a function to check the tags of a resource
+check_tags(resource) {
+    tags := resource.values.tags
+    tags.terrafied == "true"
+}
+
+# Define a rule to identify resources that do not have the required tag
+deny[msg] {
+    resource := tfplan.planned_values.root_module.resources[_]
+    not check_tags(resource)
+    msg = sprintf("Resource %v does not have the required 'terrafied' tag set to true", [resource.address])
+}

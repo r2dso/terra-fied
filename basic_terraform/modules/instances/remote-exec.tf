@@ -13,6 +13,7 @@ resource "aws_instance" "remote-exec-example" {
   tags = {
       Name = "r2dso-lab-instance-remoteexec"
       Vulnerable = "true"
+      terrafied = true
   }
 
 provisioner "remote-exec" {
